@@ -1,0 +1,21 @@
+{
+    "name": "edgarnadal/inbounder",
+    "description": "Email inbound handlers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edgar Nadal",
+            "email": "edgar.nadal@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9",
+        "illuminate/support": "5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Inbounder\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
