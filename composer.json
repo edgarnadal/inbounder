@@ -1,6 +1,6 @@
 {
     "name": "edgarnadal/inbounder",
-    "description": "Email inbound handlers",
+    "description": "Handle inbound webhooks in organized way",
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Inbounder\\": "src/"
+            "Inbounder\\": "src/Inbounder"
         }
     },
     "minimum-stability": "dev"
