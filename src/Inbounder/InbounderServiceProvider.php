@@ -2,10 +2,27 @@
 
 namespace Inbounder;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class InbounderServiceProvider extends ServiceProvider
 {
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Register bindings in the container.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // ...
+    }
+
     /**
      * Perform post-registration booting of services.
      *
@@ -13,12 +30,8 @@ class InbounderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configFilePath = __DIR__ . '../config/inbounder.php';
-
         $this->publishes([
-            $configFilePath => config_path('inbounder.php'),
-        ]);
-
-        $this->mergeConfigFrom($configFilePath, 'inbounder');
+            __DIR__.'/../config.php' => config_path('inbounder.php')
+        ], 'config');
     }
 }
