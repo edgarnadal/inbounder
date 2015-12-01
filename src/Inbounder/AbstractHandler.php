@@ -2,21 +2,40 @@
 
 namespace Inbounder;
 
-use Inbounder\Parsers\AbstractParser;
+use Inbounder\Parsers\Contracts\ParserInterface;
 
 abstract class AbstractHandler
 {
+    /**
+     * @var ParserInterface
+     */
     protected $parser;
 
-    public function __constructor(AbstractParser $parser)
+    /**
+     * Constructor
+     * 
+     * @param ParserInterface $parser
+     */
+    public function __construct(ParserInterface $parser)
     {
         $this->parser = $parser;
     }
 
-    public function getParser()
+    /**
+     * Access the parser
+     * 
+     * @return ParserInterface
+     */
+    public function parser()
     {
         return $this->parser;
     }
 
-    public function run();
+    /**
+     * Run the handler
+     * 
+     * @param Mixed $parsed
+     * @return Mixed
+     */
+    public abstract function run($parsed);
 }

@@ -2,6 +2,7 @@
 
 namespace Inbounder;
 
+use Inbounder\Inbounder;
 use Illuminate\Support\ServiceProvider;
 
 class InbounderServiceProvider extends ServiceProvider
@@ -20,7 +21,9 @@ class InbounderServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // ...
+        $this->app->bind('inbounder', function ($app) {
+            return new Inbounder($app);
+        });
     }
 
     /**
