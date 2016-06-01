@@ -2,53 +2,51 @@
 
 namespace Inbounder\Parsers;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Request;
 use Inbounder\Parsers\Contracts\ParserInterface;
 
 abstract class AbstractParser implements ParserInterface, Arrayable
 {
     /**
-     * Request
+     * Request.
      */
     protected $request;
 
     /**
-     * Attributes
+     * Attributes.
      */
     protected $attributes;
 
-    /**
-     * 
-     */
+
     public function __set($name, $value)
     {
         $this->attributes[$name] = $value;
     }
 
     /**
-     * Getter
+     * Getter.
      */
     public function __get($name)
     {
-        if (array_key_exists($name, $this->attributes))
+        if (array_key_exists($name, $this->attributes)) {
             return $this->attributes[$name];
-
-        return null;
+        }
     }
 
     /**
-     * Parse the request and return itself
-     * 
+     * Parse the request and return itself.
+     *
      * @return ParserInterface
      */
-    public abstract function parse() : ParserInterface;
+    abstract public function parse() : ParserInterface;
 
     /**
-     * Set the request that will be parsed
-     * 
+     * Set the request that will be parsed.
+     *
      * @param Request $request
-     * @return Void
+     *
+     * @return void
      */
     public function request(Request $request)
     {
@@ -56,10 +54,11 @@ abstract class AbstractParser implements ParserInterface, Arrayable
     }
 
     /**
-     * Retrieve an input from the request
-     * 
-     * @param String $name
-     * @return Mixed
+     * Retrieve an input from the request.
+     *
+     * @param string $name
+     *
+     * @return mixed
      */
     public function input($name)
     {

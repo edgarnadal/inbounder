@@ -2,7 +2,6 @@
 
 namespace Inbounder;
 
-use Inbounder\Inbounder;
 use Illuminate\Support\ServiceProvider;
 
 class InbounderServiceProvider extends ServiceProvider
@@ -34,7 +33,7 @@ class InbounderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config.php' => config_path('inbounder.php')
+            __DIR__.'/../config.php' => config_path('inbounder.php'),
         ], 'config');
     }
 }

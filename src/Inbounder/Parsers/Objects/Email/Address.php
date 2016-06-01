@@ -7,7 +7,7 @@ use Inbounder\Parsers\Objects\Object;
 class Address extends Object
 {
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct($email, $name = null, $mailboxHash = null)
     {

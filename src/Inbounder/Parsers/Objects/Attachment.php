@@ -2,8 +2,6 @@
 
 namespace Inbounder\Parsers\Objects;
 
-use Inbounder\Parsers\Objects\Object;
-
 class Attachment extends Object
 {
     public function __construct($name, $content, $type, $length)
