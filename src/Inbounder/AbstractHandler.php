@@ -12,8 +12,8 @@ abstract class AbstractHandler
     protected $parser;
 
     /**
-     * Constructor
-     * 
+     * Constructor.
+     *
      * @param ParserInterface $parser
      */
     public function __construct(ParserInterface $parser)
@@ -22,8 +22,8 @@ abstract class AbstractHandler
     }
 
     /**
-     * Access the parser
-     * 
+     * Access the parser.
+     *
      * @return ParserInterface
      */
     public function parser()
@@ -32,10 +32,11 @@ abstract class AbstractHandler
     }
 
     /**
-     * Run the handler
-     * 
-     * @param Mixed $parsed
-     * @return Mixed
+     * Run the handler.
+     *
+     * @param mixed $parsed
+     *
+     * @return mixed
      */
-    public abstract function run($parsed);
+    abstract public function run($parsed);
 }

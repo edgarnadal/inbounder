@@ -7,7 +7,7 @@ use Inbounder\Parsers\Objects\Object;
 class Header extends Object
 {
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct($name, $value)
     {

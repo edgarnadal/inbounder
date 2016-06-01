@@ -4,90 +4,89 @@ namespace Inbounder\Parsers\Contracts;
 
 use Illuminate\Support\Collection;
 use Inbounder\Parsers\Objects\Email\Address;
-use Inbounder\Parsers\Contracts\ParserInterface;
 
 interface EmailParserInterface extends ParserInterface
 {
     /**
-     * From property
-     * 
+     * From property.
+     *
      * @return Address
      */
     public function from() : Address;
 
     /**
-     * Reply-to property
-     * 
+     * Reply-to property.
+     *
      * @return Address
      */
     public function replyTo() : Address;
 
     /**
-     * To property
-     * 
+     * To property.
+     *
      * @return Collection<Address>
      */
     public function to() : Collection;
 
     /**
-     * CC property
-     * 
+     * CC property.
+     *
      * @return Collection<Address>
      */
     public function cc() : Collection;
 
     /**
-     * BCC property
-     * 
+     * BCC property.
+     *
      * @return Collection<Address>
      */
     public function bcc() : Collection;
 
     /**
-     * Subject property
-     * 
-     * @return String
+     * Subject property.
+     *
+     * @return string
      */
     public function subject();
 
     /**
-     * Body
-     * 
-     * @return String
+     * Body.
+     *
+     * @return string
      */
     public function body();
 
     /**
-     * IsText
-     * 
-     * @return Boolean
+     * IsText.
+     *
+     * @return bool
      */
     public function bodyIsText();
 
     /**
-     * IsHtml
-     * 
-     * @return Boolean
+     * IsHtml.
+     *
+     * @return bool
      */
     public function bodyIsHtml();
 
     /**
-     * Determinate if the email is marked as spam
-     * 
-     * @return Boolean
+     * Determinate if the email is marked as spam.
+     *
+     * @return bool
      */
     public function isSpam();
 
     /**
-     * Has attachements
-     * 
-     * @return Boolean
+     * Has attachements.
+     *
+     * @return bool
      */
     public function hasAttachements();
 
     /**
-     * Attachments
-     * 
+     * Attachments.
+     *
      * @return Array[Array['name', 'content', 'type']]
      */
     public function attachements();

@@ -11,5 +11,8 @@ class Inbounder extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'inbounder'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'inbounder';
+    }
 }

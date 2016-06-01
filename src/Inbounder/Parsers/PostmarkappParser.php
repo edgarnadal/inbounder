@@ -3,17 +3,17 @@
 namespace Inbounder\Parsers;
 
 use Illuminate\Support\Collection;
-use Inbounder\Parsers\Objects\Attachment;
-use Inbounder\Parsers\Objects\Email\Header;
-use Inbounder\Parsers\Objects\Email\Address;
-use Inbounder\Parsers\Contracts\ParserInterface;
 use Inbounder\Parsers\Contracts\EmailParserInterface;
+use Inbounder\Parsers\Contracts\ParserInterface;
+use Inbounder\Parsers\Objects\Attachment;
+use Inbounder\Parsers\Objects\Email\Address;
+use Inbounder\Parsers\Objects\Email\Header;
 
 class PostmarkappParser extends AbstractParser implements EmailParserInterface
 {
     /**
-     * Parse the request and return itself
-     * 
+     * Parse the request and return itself.
+     *
      * @return ParserInterface
      */
     public function parse() : ParserInterface
@@ -34,35 +34,38 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Return an Address object from an input
-     * 
-     * @param Array $input
+     * Return an Address object from an input.
+     *
+     * @param array $input
+     *
      * @return Address
      */
-    protected function address(Array $input) : Address
+    protected function address(array $input) : Address
     {
         return new Address($input['Email'], $input['Name'], $input['MailboxHash']);
     }
 
     /**
-     * Parse an array of addresses
-     * 
-     * @param Array $input
+     * Parse an array of addresses.
+     *
+     * @param array $input
+     *
      * @return Collection
      */
-    protected function foreachAddress(Array $input) : Collection
+    protected function foreachAddress(array $input) : Collection
     {
-        $collection = new Collection;
+        $collection = new Collection();
 
-        foreach ($input as $address)
+        foreach ($input as $address) {
             $collection->push($this->address($address));
+        }
 
         return $collection;
     }
 
     /**
-     * From property
-     * 
+     * From property.
+     *
      * @return Address
      */
     public function from() : Address
@@ -71,10 +74,10 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Reply-to property
-     * 
+     * Reply-to property.
+     *
      * @todo: edit this to handler the reply-to parameter
-     * 
+     *
      * @return Address
      */
     public function replyTo() : Address
@@ -83,8 +86,8 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * To property
-     * 
+     * To property.
+     *
      * @return Collection<Address>
      */
     public function to() : Collection
@@ -93,8 +96,8 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * CC property
-     * 
+     * CC property.
+     *
      * @return Collection<Address>
      */
     public function cc() : Collection
@@ -103,8 +106,8 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * BCC property
-     * 
+     * BCC property.
+     *
      * @return Collection<Address>
      */
     public function bcc() : Collection
@@ -113,9 +116,9 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Subject property
-     * 
-     * @return String
+     * Subject property.
+     *
+     * @return string
      */
     public function subject()
     {
@@ -123,24 +126,25 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Body
-     * 
-     * @return String
+     * Body.
+     *
+     * @return string
      */
     public function body()
     {
         $body = $this->bodyHtml();
 
-        if ($this->bodyIsText())
+        if ($this->bodyIsText()) {
             $body = $this->bodyText();
+        }
 
         return $body;
     }
 
     /**
-     * Return the body html
-     * 
-     * @return String
+     * Return the body html.
+     *
+     * @return string
      */
     public function bodyHtml()
     {
@@ -148,9 +152,9 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Return the body text
-     * 
-     * @return String
+     * Return the body text.
+     *
+     * @return string
      */
     public function bodyText()
     {
@@ -158,43 +162,44 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * IsText
-     * 
-     * @return Boolean
+     * IsText.
+     *
+     * @return bool
      */
     public function bodyIsText()
     {
-        return ! $this->bodyIsHtml();
+        return !$this->bodyIsHtml();
     }
 
     /**
-     * IsHtml
-     * 
-     * @return Boolean
+     * IsHtml.
+     *
+     * @return bool
      */
     public function bodyIsHtml()
     {
-        return ! is_null($this->input('HtmlBody')) || $this->input('HtmlBody') !== '';
+        return !is_null($this->input('HtmlBody')) || $this->input('HtmlBody') !== '';
     }
 
     /**
-     * Get email headers
-     * 
+     * Get email headers.
+     *
      * @return Collection
      */
     public function headers() : Collection
     {
-        $collection = new Collection;
+        $collection = new Collection();
 
-        foreach ($this->input('Headers') as $header)
+        foreach ($this->input('Headers') as $header) {
             $collection->push(new Header($header['Name'], $header['Value']));
+        }
 
         return $collection;
     }
 
     /**
-     * retrieve a email header
-     * 
+     * retrieve a email header.
+     *
      * return Array
      */
     public function header($name) : Header
@@ -205,20 +210,21 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Determinate if the email is marked as spam
-     * 
-     * @return Boolean
+     * Determinate if the email is marked as spam.
+     *
+     * @return bool
      */
     public function isSpam()
     {
         $header = $this->header('X-Spam-Flag');
+
         return $header->value === 'NO' ? false : true;
     }
 
     /**
-     * Has attachements
-     * 
-     * @return Boolean
+     * Has attachements.
+     *
+     * @return bool
      */
     public function hasAttachements()
     {
@@ -226,23 +232,24 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
     }
 
     /**
-     * Attachments
-     * 
+     * Attachments.
+     *
      * @return Collection<File>
      */
     public function attachements() : Collection
     {
-        $collection = new Collection;
+        $collection = new Collection();
 
-        foreach ($this->input('Attachments') as $attachment)
+        foreach ($this->input('Attachments') as $attachment) {
             $collection->push(
                 new Attachment(
                     $attachment['Name'],
-                    ( isset($attachment['Content']) ? $attachment['Content'] : '' ),
+                    (isset($attachment['Content']) ? $attachment['Content'] : ''),
                     $attachment['ContentType'],
                     $attachment['ContentLength']
                 )
             );
+        }
 
         return $collection;
     }

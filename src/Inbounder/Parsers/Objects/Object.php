@@ -8,12 +8,12 @@ use Illuminate\Contracts\Support\Arrayable;
 class Object implements Arrayable
 {
     /**
-     * Attributes
+     * Attributes.
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct($email, $name = null, $mailboxHash = null)
     {
@@ -23,7 +23,7 @@ class Object implements Arrayable
     }
 
     /**
-     * Setter
+     * Setter.
      */
     public function __set($name, $value)
     {
@@ -31,13 +31,14 @@ class Object implements Arrayable
     }
 
     /**
-     * Getter
+     * Getter.
      */
     public function __get($name)
     {
-        if ( ! array_key_exists($name, $this->attributes))
+        if (!array_key_exists($name, $this->attributes)) {
             throw new MissingAttributeException("The attribute $name does not exists.", 1);
-            
+        }
+
         return $this->attributes[$name];
     }
 

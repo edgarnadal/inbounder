@@ -3,14 +3,13 @@
 namespace Inbounder;
 
 use Illuminate\Http\Request;
-use Inbounder\GatewayManager;
 use Inbounder\Exceptions\UndefinedGatewayException;
 
 class Inbounder
 {
     /**
-     * Class constructor
-     * 
+     * Class constructor.
+     *
      * @param App $app
      */
     public function __construct($app)
@@ -19,24 +18,27 @@ class Inbounder
     }
 
     /**
-     * Create a new instance handler for the given gateway
-     * 
-     * @param String $name
+     * Create a new instance handler for the given gateway.
+     *
+     * @param string $name
+     *
      * @return AbstractHandler
      */
     protected function newHandlerInstanceFor($name)
     {
-        if ( ! $handler = config('inbounder.gateways.'  . $name))
+        if (!$handler = config('inbounder.gateways.'.$name)) {
             throw new UndefinedGatewayException('The gateway \''.$name.'\' is not defined');
+        }
 
         return $this->app->make($handler);
     }
 
     /**
-     * Return an instance of the gateway manager
-     * 
-     * @param String $gateway
+     * Return an instance of the gateway manager.
+     *
+     * @param string  $gateway
      * @param Request $request
+     *
      * @return GatewayManager
      */
     public function gateway($gateway, Request $request)

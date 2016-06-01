@@ -3,7 +3,6 @@
 namespace Inbounder;
 
 use Illuminate\Http\Request;
-use Inbounder\AbstractHandler;
 
 class GatewayManager
 {
@@ -22,21 +21,19 @@ class GatewayManager
      */
     protected $handler;
 
-    /**
-     * 
-     */
+
     public function __construct(AbstractHandler $handler, Request $request)
     {
         $this->handler = $handler;
         $this->request = $request;
-        
+
         $this->parser = $handler->parser();
         $this->parser->request($request);
     }
 
     /**
-     * Parse the inbound request
-     * 
+     * Parse the inbound request.
+     *
      * @return ParserInterface
      */
     public function parse()
@@ -45,8 +42,8 @@ class GatewayManager
     }
 
     /**
-     * Run the handler
-     * 
+     * Run the handler.
+     *
      * @return ??
      */
     public function runHandler()
