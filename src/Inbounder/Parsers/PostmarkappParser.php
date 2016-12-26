@@ -202,7 +202,7 @@ class PostmarkappParser extends AbstractParser implements EmailParserInterface
      *
      * return Array
      */
-    public function header($name) : Header
+    public function header($name)
     {
         return $this->headers()->filter(function ($header) use ($name) {
             return $header->name === $name;
